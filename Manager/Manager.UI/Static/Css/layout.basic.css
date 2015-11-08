@@ -27,5 +27,22 @@
 
 .command-list {
     float: left;
-	padding-left:160px;
+    padding-left: 160px;
+}
+
+#userInfo {
+    float: right;
+    margin-top: -30px;
+}
+
+.navbar-buttom, .nav-buttom {
+    width: 100%;
+}
+
+.nav-list-buttom {
+    float: right;
+}
+
+.nav-about {
+    float: left;
 }

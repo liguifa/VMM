@@ -39,19 +39,20 @@
             {
                 username: username,
                 password: password,
-                userType:userType
+                userType: userType
             },
-            usccess: function (data)
+            success: function (data)
             {
                 //data.Status = true登录成功.
                 if (data.Status)
                 {
                     //重定向到首页
-                    //window.location.href = "/D";
+                    window.location.href = "/Dashboard";
                 }
                 else
                 {
                     //登录失败提示
+                    alert(data.Context);
                 }
             }
         });
@@ -61,7 +62,7 @@
 });
 
 //通过传入的正则表达式验证传入的数据格式是否正确
-function CheckStringUsingRegex(regexString,value)
+function CheckStringUsingRegex(regexString, value)
 {
     var regexObject = new RegExp(regexString);
     if (regexObject.exec(value) == value)

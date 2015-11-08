@@ -1,4 +1,5 @@
 ﻿using Common.Logger;
+using Common.Message;
 using Manager.BLL;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,12 @@ namespace Manager.UI.Controllers
         {
             Logger.Instance(typeof(HomeController)).Info("IP:{0}登录系统.", HttpContext.Request.UserHostAddress);
             //执行登录操作
-            return Json(new User().Login(username, password));
+            Message result = new User().Login(username, password,userType);
+            if (result.Status)
+            {
+                Session["user"] = result.Append;
+            }
+            return Json(result);
         }
     }
 }

@@ -25,27 +25,38 @@
     <!--顶条-->
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-            <a class="brand" href="#">Title</a>
-            <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
+            VMM Manager
+            <div>
+                @if (ViewBag.user != null)
+                {
+                    Manager.Model.User user = ViewBag.user as Manager.Model.User;
+                    <div id="userInfo">
+                        <button class="win-command" rel="tootlip" title="Simple command with only an icon">
+                            <span class="win-commandicon icon-cog-4"></span>
+                        </button>
+                        <span>@user.User_Username</span>
+                    </div>
+                }
+            </div>
         </div>
     </div>
     <!--顶条结束-->
-
     @RenderBody()
 
     <!--低条-->
-    <div class="navbar navbar-fixed-bottom">
-        <div class="navbar-inner">
-            <a class="brand" href="#">Title</a>
-            <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
+    <div class="navbar navbar-fixed-bottom navbar-buttom">
+        <div class="navbar-inner nav-buttom">
+            <div class="nav-list-buttom">
+                <a class="brand">VM Manager</a>
+                <ul class="nav">
+                    <li><a href="#">关于</a></li>
+                    <li><a href="#">帮助</a></li>
+                    <li><a href="#">代码</a></li>
+                </ul>
+            </div>
+            <div id="nav-about">
+                &copy;2015 版权所有
+            </div>
         </div>
     </div>
     <!--低条结束-->

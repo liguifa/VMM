@@ -213,6 +213,14 @@
     <Content Include="Views\System\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Logger\Common.Logger.csproj">
+      <Project>{c2c92005-3adc-49e2-85a2-8bd031190485}</Project>
+      <Name>Common.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Message\Common.Message.csproj">
+      <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
+      <Name>Common.Message</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Manager.BLL\Manager.BLL.csproj">
       <Project>{0c34b9c7-b6c2-4266-8e59-b869fcbd100a}</Project>
       <Name>Manager.BLL</Name>

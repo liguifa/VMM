@@ -22,8 +22,6 @@ namespace Common.Logger
 
         public static bool IsWriteDebug = true;
 
-        //private log4net.ia
-
         private Logger(Type type)
         {
             loggerImp = new LoggerImp();

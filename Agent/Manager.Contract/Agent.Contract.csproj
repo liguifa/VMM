@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0C34B9C7-B6C2-4266-8E59-B869FCBD100A}</ProjectGuid>
+    <ProjectGuid>{CFC194D6-31ED-4AA6-AE5F-65C5555E6657}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Manager.BLL</RootNamespace>
-    <AssemblyName>Manager.BLL</AssemblyName>
+    <RootNamespace>Manager.Contract</RootNamespace>
+    <AssemblyName>Manager.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,32 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseBLL.cs" />
+    <Compile Include="ISystemStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="VMSystem.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.Function\Common.Function.csproj">
-      <Project>{1e0b34a5-233d-45f7-933d-51b71be3d62e}</Project>
-      <Name>Common.Function</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\Common.Logger\Common.Logger.csproj">
-      <Project>{c2c92005-3adc-49e2-85a2-8bd031190485}</Project>
-      <Name>Common.Logger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\Common.Message\Common.Message.csproj">
-      <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
-      <Name>Common.Message</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Manager.DAL\Manager.DAL.csproj">
-      <Project>{cc359afd-6f4f-4698-826b-7d8e721bc240}</Project>
-      <Name>Manager.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Manager.Model\Manager.Model.csproj">
-      <Project>{21fbe115-49c5-47c9-b789-f018500ff3e1}</Project>
-      <Name>Manager.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Static/Css/layout.css" rel="stylesheet" />
+    <link href="~/Static/bootmetro/css/min/bootmetro.min.css" rel="stylesheet" />
+    <link href="~/Static/bootmetro/css/min/bootmetro-ui-light.min.css" rel="stylesheet" />
+    <link href="~/Static/bootmetro/css/min/bootmetro-responsive.min.css" rel="stylesheet" />
+    <link href="~/Static/bootmetro/css/min/bootmetro-icons.min.css" rel="stylesheet" />
+    <script src="~/Static/Js/jquery-2.1.4.min.js"></script>
+    <script src="~/Static/bootmetro/js/min/bootstrap.min.js"></script>
+    <script src="~/Static/bootmetro/js/min/bootmetro.min.js"></script>
+    <script src="~/Static/bootmetro/js/min/bootmetro-pivot.min.js"></script>
+    <script src="~/Static/bootmetro/js/min/bootmetro-panorama.min.js"></script>
+    <script src="~/Static/bootmetro/js/min/bootmetro-icons-ie7.min.js"></script>
+    <script src="~/Static/bootmetro/js/min/bootmetro-charms.min.js"></script>
+</head>
+<body>
+    <!--顶条-->
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Title</a>
+            <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--顶条结束-->
+
+    @RenderBody()
+
+    <!--低条-->
+    <div class="navbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Title</a>
+            <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--低条结束-->
+</body>
+</html>

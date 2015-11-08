@@ -1,0 +1,31 @@
+﻿html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.nav-left {
+    width: 9.5%;
+    height: 100%;
+    margin-top: 40px;
+    float: left;
+}
+
+.context {
+    float: right;
+    margin-top: 40px;
+    width: 84.571%;
+    height: 100%;
+}
+
+.nav-page-top {
+    float: left;
+}
+
+.nav-page-buttom {
+    float: right;
+}
+
+.command-list {
+    float: left;
+	padding-left:160px;
+}

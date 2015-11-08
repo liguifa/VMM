@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "用户登录";
+    Layout = "~/Views/Shared/Layout.login.cshtml";
+}
+
+<link href="~/Static/Css/Login.css" rel="stylesheet" />
+<script src="~/Static/Js/Login.js"></script>
+
+<div class="well login">
+    <div class="tabbable">
+        <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs nav-login">
+            <li><a href="#CreatRemove" data-toggle="tab">创建&删除</a></li>
+            <li class="active"><a href="#ordinary" data-toggle="tab">普通用户</a></li>
+            <li><a href="#admin" data-toggle="tab">管理员</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="CreateRemove">
+                <form class="form-horizontal" data-type="CreateAndRemove">
+                    <div class="control-group">
+                        <label class="control-label" for="username">用户名</label>
+                        <div class="controls">
+                            <input type="text" class="username" placeholder="用户名">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">密码</label>
+                        <div class="controls">
+                            <input type="password" class="password" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox"><span class="metro-checkbox">记住我</span>
+                            </label>
+                            <button type="submit" class="btn">登录</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="ordinary">
+                <form class="form-horizontal" data-type="Ordinary">
+                    <div class="control-group">
+                        <label class="control-label" for="username">用户名</label>
+                        <div class="controls">
+                            <input type="text" class="username" placeholder="用户名">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">密码</label>
+                        <div class="controls">
+                            <input type="password" class="password" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox"><span class="metro-checkbox">记住我</span>
+                            </label>
+                            <button type="submit" class="btn">登录</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="admin">
+                <form class="form-horizontal" data-type="admin">
+                    <div class="control-group">
+                        <label class="control-label" for="username">用户名</label>
+                        <div class="controls">
+                            <input type="text" class="username" placeholder="用户名">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">密码</label>
+                        <div class="controls">
+                            <input type="password" class="password" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox"><span class="metro-checkbox">记住我</span>
+                            </label>
+                            <button type="submit" class="btn">登录</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

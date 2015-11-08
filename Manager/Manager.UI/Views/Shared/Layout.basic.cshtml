@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Layout.basic";
+    Layout = "~/Views/Shared/Layout.login.cshtml";
+}
+<link href="~/Static/Css/layout.basic.css" rel="stylesheet" />
+<div class="well nav-left">
+    <ul class="nav nav-list">
+        <li class="active"><a href="/Dashboard">Dashboard</a></li>
+        <li><a href="/System">VM&nbsp;&nbsp;&nbsp;&nbsp;系统</a></li>
+        <li><a href="#">系统备份</a></li>
+        <li><a href="#">系统还原</a></li>
+        <li><a href="#">系统迁移</a></li>
+        <li><a href="#">任务监视</a></li>
+        <li><a href="#">Administrator</a></li>
+    </ul>
+</div>
+<div class="well context">
+    @RenderBody()
+</div>

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.basic.cshtml";
+}
+<script src="~/Static/Highcharts/highcharts.js"></script>
+<div id="container" style="margin-top:80px;"></div>
+
+<script>
+    $(function ()
+    {
+        $('#container').highcharts({                   //图表展示容器，与div的id保持一致
+            chart: {
+                type: 'column'                         //指定图表的类型，默认是折线图（line）
+            },
+            title: {
+                text: 'VM 系统操作报表'      //指定图表标题
+            },
+            xAxis: {
+                categories: ['我的', '全部', '新增']   //指定x轴分组
+            },
+            yAxis: {
+                title: {
+                    text: 'VM 系统个数'                  //指定y轴的标题
+                }
+            },
+            series: [{                                 //指定数据列
+                name: '开机',                          //数据列名
+                data: [1, 5, 34]                        //数据
+            }, {
+                name: '关机',
+                data: [5, 7, 3]
+            }]
+        });
+    });
+</script>

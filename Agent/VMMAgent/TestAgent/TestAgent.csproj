@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{15CBBF22-6CCE-47D6-9765-283CD7B1DBE7}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{B7260F57-EC02-4B2D-9744-197C31B5E660}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Message</RootNamespace>
-    <AssemblyName>Message</AssemblyName>
+    <RootNamespace>TestAgent</RootNamespace>
+    <AssemblyName>TestAgent</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,10 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Data.Services, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,11 +42,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DashboardMessage.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemRequestMessage.cs" />
-    <Compile Include="SystemResponseMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.Function\Common.Function.csproj">
+      <Project>{1e0b34a5-233d-45f7-933d-51b71be3d62e}</Project>
+      <Name>Common.Function</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Common.Logger\Common.Logger.csproj">
+      <Project>{c2c92005-3adc-49e2-85a2-8bd031190485}</Project>
+      <Name>Common.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Common.Message\Common.Message.csproj">
+      <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
+      <Name>Common.Message</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Manager.Contract\Agent.Contract.csproj">
+      <Project>{cfc194d6-31ed-4aa6-ae5f-65c5555e6657}</Project>
+      <Name>Agent.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Manager.Services\Agent.Services.csproj">
+      <Project>{24421224-813b-4786-bcdb-b715a6e5de29}</Project>
+      <Name>Agent.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

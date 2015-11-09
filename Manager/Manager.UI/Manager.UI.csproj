@@ -213,6 +213,14 @@
     <Content Include="Views\System\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Agent\Manager.Contract\Agent.Contract.csproj">
+      <Project>{cfc194d6-31ed-4aa6-ae5f-65c5555e6657}</Project>
+      <Name>Agent.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Agent\Manager.Services\Agent.Services.csproj">
+      <Project>{24421224-813b-4786-bcdb-b715a6e5de29}</Project>
+      <Name>Agent.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.Logger\Common.Logger.csproj">
       <Project>{c2c92005-3adc-49e2-85a2-8bd031190485}</Project>
       <Name>Common.Logger</Name>

@@ -47,6 +47,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Function\Common.Function.csproj">
+      <Project>{1e0b34a5-233d-45f7-933d-51b71be3d62e}</Project>
+      <Name>Common.Function</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Logger\Common.Logger.csproj">
+      <Project>{c2c92005-3adc-49e2-85a2-8bd031190485}</Project>
+      <Name>Common.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Message\Common.Message.csproj">
+      <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
+      <Name>Common.Message</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Manager.Model\Manager.Model.csproj">
       <Project>{21fbe115-49c5-47c9-b789-f018500ff3e1}</Project>
       <Name>Manager.Model</Name>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,8 +17,8 @@ namespace TestAgent
             {
                 host.Opened += host_Opened;
                 host.Open();
+                Console.Read();
             }
-            Console.Read();
         }
 
         static void host_Opened(object sender, EventArgs e)

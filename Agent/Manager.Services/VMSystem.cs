@@ -13,13 +13,14 @@ namespace Manager.Services
         public SystemResponseMessage GetSystemStatus(SystemRquestMessage request)
         {
             //TODO   现在是模拟数据
-            SystemResponseMessage reponse = new SystemResponseMessage();
+            SystemResponseMessage response = new SystemResponseMessage();
             Random random = new Random();
+            response.SystemInfo = new Dictionary<string, object>();
             foreach (string name in request.Names)
             {
-                reponse.SystemInfo.Add(name, random.Next(0, 2) == 1 ? true : false);
+                response.SystemInfo.Add(name, random.Next(0, 2) == 1 ? true : false);
             }
-            return reponse;
+            return response;
         }
     }
 }

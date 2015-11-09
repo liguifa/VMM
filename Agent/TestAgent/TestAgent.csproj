@@ -49,23 +49,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Common.Function\Common.Function.csproj">
+    <ProjectReference Include="..\..\Common\Common.Function\Common.Function.csproj">
       <Project>{1e0b34a5-233d-45f7-933d-51b71be3d62e}</Project>
       <Name>Common.Function</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common\Common.Logger\Common.Logger.csproj">
+    <ProjectReference Include="..\..\Common\Common.Logger\Common.Logger.csproj">
       <Project>{c2c92005-3adc-49e2-85a2-8bd031190485}</Project>
       <Name>Common.Logger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common\Common.Message\Common.Message.csproj">
+    <ProjectReference Include="..\..\Common\Common.Message\Common.Message.csproj">
       <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
       <Name>Common.Message</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Manager.Contract\Agent.Contract.csproj">
+    <ProjectReference Include="..\Manager.Contract\Agent.Contract.csproj">
       <Project>{cfc194d6-31ed-4aa6-ae5f-65c5555e6657}</Project>
       <Name>Agent.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Manager.Services\Agent.Services.csproj">
+    <ProjectReference Include="..\Manager.Services\Agent.Services.csproj">
       <Project>{24421224-813b-4786-bcdb-b715a6e5de29}</Project>
       <Name>Agent.Services</Name>
     </ProjectReference>

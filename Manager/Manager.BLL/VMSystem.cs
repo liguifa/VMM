@@ -19,12 +19,18 @@ namespace Manager.BLL
             List<Manager.Model.VM> systems = base.Search(d => d.VM_User == id && d.VM_IsDel == false);
             SystemRquestMessage request = new SystemRquestMessage();
             request.Names = systems.Select(d => d.VM_Name).ToList();
-            using (ChannelFactory<IVMSystem> channelFactory = new ChannelFactory<IVMSystem>("Manager.Services.VMSystem"))
+            SystemResponseMessage response = null;
+            using (ChannelFactory<IVMSystem> channelFactory = new ChannelFactory<IVMSystem>("VMSystem"))
             {
                 IVMSystem proxy = channelFactory.CreateChannel();
-                SystemResponseMessage response = proxy.GetSystemStatus(request);
+                response = proxy.GetSystemStatus(request);
             }
-            return null;
+            DashboardMessage message = new DashboardMessage();
+            message.MyActiveSystemCount = response.SystemInfo.Select(d => (bool)d.Value == true).Count();
+            message.MyShutdownSystemCount = response.SystemInfo.Select(d => (bool)d.Value == false).Count();
+            message.ActiveSystem = 10;
+            message.ShutdownSystemCount = 12;
+            return message;
         }
     }
 }

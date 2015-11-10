@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="VMMModel.VM" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="VMMModel.FK_Users_Jurisdictions" ManuallyRouted="false" />
         <AssociationConnector Association="VMMModel.FK_VMs_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VMMModel.AgentServer" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

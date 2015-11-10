@@ -13,5 +13,8 @@ namespace Common.Message
     {
         [DataMember]
         public List<string> Names { get; set; }
+
+        [DataMember]
+        public string Key { get; set; }
     }
 }

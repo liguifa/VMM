@@ -32,6 +32,7 @@ namespace Manager.Model
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<VM> VMs { get; set; }
+        public DbSet<AgentServer> AgentServers { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

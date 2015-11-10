@@ -13,63 +13,79 @@ namespace Manager.BLL
 {
     public class VMSystem : BaseBLL<Manager.Model.VM>
     {
+        private object syncRoot = new object();
+
+        /// <summary>
+        /// 获取VM系统开关机个数
+        /// </summary>
+        /// <param name="id">用户Id</param>
+        /// <returns>包含VM系统开关机个数的消息</returns>
         public DashboardMessage GetSystemStatus(Guid id)
         {
-            Logger.Instance(typeof(VMSystem)).Info("获取VM系统状态.");
-            //查询VM系统列表
-            List<Manager.Model.VM> systems = base.Search(d => d.VM_User == id && d.VM_IsDel == false);
-            SystemRquestMessage request = new SystemRquestMessage();
-            request.Names = systems.Select(d => d.VM_Name).ToList();
-            //查询AgentServer列表
-            List<Manager.Model.AgentServer> agentServers = new AgentServer().GetAgentServer();
-            List<Thread> serverThread = new List<Thread>();
             DashboardMessage message = new DashboardMessage();
-            foreach (Manager.Model.AgentServer agentServer in agentServers)
+            try
             {
-                request.Key = agentServer.AgentServer_Key;
-                EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
-                Thread thread = new Thread(() =>
+                Logger.Instance(typeof(VMSystem)).Info("获取VM系统状态.");
+                //查询VM系统列表
+                List<Manager.Model.VM> systems = base.Search(d => d.VM_User == id && d.VM_IsDel == false);
+                SystemRquestMessage request = new SystemRquestMessage();
+                request.Names = systems.Select(d => d.VM_Name).ToList();
+                //查询AgentServer列表
+                List<Manager.Model.AgentServer> agentServers = new AgentServer().GetAgentServer();
+                List<Thread> serverThread = new List<Thread>();
+                foreach (Manager.Model.AgentServer agentServer in agentServers)
                 {
-                    try
+                    request.Key = agentServer.AgentServer_Key;
+                    EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
+                    Thread thread = new Thread(() =>
                     {
-                        //调用接口获取VM系统信息
-                        using (ChannelFactory<IVMSystem> channelFactory = new ChannelFactory<IVMSystem>("VMSystem"))     
+                        try
                         {
-                            IVMSystem proxy = channelFactory.CreateChannel(endpoint);
-                            SystemResponseMessage response = proxy.GetSystemStatus(request);
-                            if (message.MyActiveSystemCount == null)
+                            SystemResponseMessage response = null;
+                            //调用接口获取VM系统信息
+                            using (ChannelFactory<IVMSystem> channelFactory = new ChannelFactory<IVMSystem>("VMSystem"))
                             {
-                                message.MyActiveSystemCount = response.SystemInfo.Select(d => (bool)d.Value == true).Count();
-                                message.MyShutdownSystemCount = response.SystemInfo.Select(d => (bool)d.Value == false).Count();
+                                IVMSystem proxy = channelFactory.CreateChannel(endpoint);
+                                response = proxy.GetSystemStatus(request);
                             }
-                            else
+                            lock (this.syncRoot)
                             {
-                                message.MyActiveSystemCount += response.SystemInfo.Select(d => (bool)d.Value == true).Count();
-                                message.MyShutdownSystemCount += response.SystemInfo.Select(d => (bool)d.Value == false).Count();
+                                message.MyActiveSystemCount += response.SystemInfo.Where(d => (bool)d.Value).Count();
+                                message.MyShutdownSystemCount += response.SystemInfo.Where(d => !(bool)d.Value).Count();
                             }
                         }
-                    }
-                    catch (TimeoutException e)
-                    {
-                        Logger.Instance(typeof(VMSystem)).Warn(e.Message);
-                    }
-                    catch (Exception e)
-                    {
-                        Logger.Instance(typeof(VMSystem)).Error(e.Message);
-                    }
-                });
-                thread.Start();
-                serverThread.Add(thread);
+                        catch (TimeoutException e)
+                        {
+                            Logger.Instance(typeof(VMSystem)).Error(string.Format("线程超时,Thread Name:{0},{1}", Thread.CurrentThread.Name, e.Message));
+                        }
+                        catch (CommunicationException e)
+                        {
+                            Logger.Instance(typeof(VMSystem)).Error(string.Format("WCF通信异常,{0}:{1},{2}", agentServer.AgentServer_Address, agentServer.AgentServer_Port, e.Message));
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Instance(typeof(VMSystem)).Error(e.Message);
+                        }
+                    });
+                    thread.Start();
+                    serverThread.Add(thread);
+                }
+                DateTime currentTime = DateTime.Now;
+                //等待获取VM系统信息的线程全部结束 最大等待时间为30分钟
+                while (serverThread.Where(d => d.IsAlive).Count() > 0 && currentTime.AddMinutes(30) > DateTime.Now)
+                {
+                    Thread.Sleep(100);
+                }
+                //message.ActiveSystem = 10;
+                //message.ShutdownSystemCount = 12;
             }
-            DateTime currentTime = DateTime.Now;
-            //等待获取VM系统信息的线程全部结束 最大等待时间为30分钟
-            while (serverThread.Select(d => d.IsAlive).Count() > 0 && currentTime.AddMinutes(30) > DateTime.Now)    
+            catch (Exception e)
             {
-                Thread.Sleep(100);
+                Logger.Instance(typeof(VMSystem)).Error(e.Message);
             }
-            message.ActiveSystem = 10;
-            message.ShutdownSystemCount = 12;
             return message;
         }
+
+        //public 
     }
 }

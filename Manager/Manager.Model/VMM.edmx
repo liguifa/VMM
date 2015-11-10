@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="VMMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AgentServer">
+        <EntityType Name="AgentServers">
           <Key>
             <PropertyRef Name="AgentServer_Id" />
           </Key>
@@ -81,7 +81,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="VMMModelStoreContainer">
-          <EntitySet Name="AgentServer" EntityType="Self.AgentServer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentServers" EntityType="Self.AgentServers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jurisdictions" EntityType="Self.Jurisdictions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -287,7 +287,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="AgentServers">
             <EntityTypeMapping TypeName="VMMModel.AgentServer">
-              <MappingFragment StoreEntitySet="AgentServer">
+              <MappingFragment StoreEntitySet="AgentServers">
                 <ScalarProperty Name="AgentServer_IsDel" ColumnName="AgentServer_IsDel" />
                 <ScalarProperty Name="AgentServer_Key" ColumnName="AgentServer_Key" />
                 <ScalarProperty Name="AgentServer_Port" ColumnName="AgentServer_Port" />

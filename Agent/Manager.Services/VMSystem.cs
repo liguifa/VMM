@@ -22,5 +22,12 @@ namespace Manager.Services
             }
             return response;
         }
+
+
+        public SystemInfoResponseMessage GetSystemInfo(SystemInfoRequestMessage request)
+        {
+            //TODO
+            return null;
+        }
     }
 }

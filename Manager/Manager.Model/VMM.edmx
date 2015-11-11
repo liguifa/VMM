@@ -143,6 +143,7 @@
           <Property Name="VM_OperationTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="VM_IsDel" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_VMs_Users" FromRole="VMs" ToRole="Users" />
+          <Property Name="VM_Agent" Type="Guid" Nullable="false" />
         </EntityType>
         <Association Name="FK_Users_Jurisdictions">
           <End Role="Jurisdictions" Type="Self.Jurisdiction" Multiplicity="1" />

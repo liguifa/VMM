@@ -13,5 +13,8 @@ namespace Manager.Contract
     {
         [OperationContract]
         SystemResponseMessage GetSystemStatus(SystemRquestMessage request);
+
+        [OperationContract]
+        SystemInfoResponseMessage GetSystemInfo(SystemInfoRequestMessage request);
     }
 }

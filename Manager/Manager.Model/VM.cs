@@ -22,6 +22,7 @@ namespace Manager.Model
         public System.DateTime VM_CreateTime { get; set; }
         public System.DateTime VM_OperationTime { get; set; }
         public bool VM_IsDel { get; set; }
+        public System.Guid VM_Agent { get; set; }
     
         public virtual User User { get; set; }
     }

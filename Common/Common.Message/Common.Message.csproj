@@ -45,8 +45,12 @@
     <Compile Include="DashboardMessage.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemInfoRequestMessage.cs" />
+    <Compile Include="SystemInfoResponseMessage.cs" />
     <Compile Include="SystemRequestMessage.cs" />
     <Compile Include="SystemResponseMessage.cs" />
+    <Compile Include="SystemInfoMessage.cs" />
+    <Compile Include="SysytemActiveMessage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

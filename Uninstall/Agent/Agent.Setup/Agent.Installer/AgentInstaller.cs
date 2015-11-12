@@ -21,7 +21,8 @@ namespace Agent.Installer
         protected override void OnAfterInstall(IDictionary savedState)
         {
             base.OnAfterInstall(savedState);
-            //TODO
+      
+            AgentConfig.Create(Context.Parameters["assemblypath"], Context.Parameters["ADDRESS"], Context.Parameters["PORT"], Context.Parameters["KEY"]);
         }
     }
 }

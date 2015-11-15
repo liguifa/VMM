@@ -8,10 +8,11 @@
         <EntityTypeShape EntityType="VMMModel.Jurisdiction" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="VMMModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VMMModel.User" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="VMMModel.VM" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="VMMModel.FK_Users_Jurisdictions" ManuallyRouted="false" />
-        <AssociationConnector Association="VMMModel.FK_VMs_Users" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="VMMModel.AgentServer" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="VMMModel.AgentServer" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="VMMModel.VM" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="VMMModel.FK_VMs_AgentServers" />
+        <AssociationConnector Association="VMMModel.FK_VMs_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

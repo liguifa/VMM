@@ -48,6 +48,7 @@
     <Compile Include="AgentInstaller.Designer.cs">
       <DependentUpon>AgentInstaller.cs</DependentUpon>
     </Compile>
+    <Compile Include="AgentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

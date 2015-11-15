@@ -47,14 +47,6 @@
     <Compile Include="VMSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Agent\Manager.Contract\Agent.Contract.csproj">
-      <Project>{cfc194d6-31ed-4aa6-ae5f-65c5555e6657}</Project>
-      <Name>Agent.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Agent\Manager.Services\Agent.Services.csproj">
-      <Project>{24421224-813b-4786-bcdb-b715a6e5de29}</Project>
-      <Name>Agent.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.Function\Common.Function.csproj">
       <Project>{1e0b34a5-233d-45f7-933d-51b71be3d62e}</Project>
       <Name>Common.Function</Name>
@@ -66,6 +58,10 @@
     <ProjectReference Include="..\..\Common\Common.Message\Common.Message.csproj">
       <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
       <Name>Common.Message</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Manager.AgentServices\Manager.AgentServices.csproj">
+      <Project>{6dfcf662-c1bd-45a8-89d8-d466b8624108}</Project>
+      <Name>Manager.AgentServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Manager.DAL\Manager.DAL.csproj">
       <Project>{cc359afd-6f4f-4698-826b-7d8e721bc240}</Project>

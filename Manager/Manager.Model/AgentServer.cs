@@ -14,10 +14,17 @@ namespace Manager.Model
     
     public partial class AgentServer
     {
+        public AgentServer()
+        {
+            this.VMs = new HashSet<VM>();
+        }
+    
         public System.Guid AgentServer_Id { get; set; }
         public string AgentServer_Address { get; set; }
         public int AgentServer_Port { get; set; }
         public string AgentServer_Key { get; set; }
         public bool AgentServer_IsDel { get; set; }
+    
+        public virtual ICollection<VM> VMs { get; set; }
     }
 }

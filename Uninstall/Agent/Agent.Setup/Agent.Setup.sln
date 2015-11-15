@@ -7,6 +7,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Agent.Setup", "Agent.Setup\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.Installer", "Agent.Installer\Agent.Installer.csproj", "{7A81B2FD-A6EF-4AAF-8BB0-DD8ABA98126F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{08BF54CB-847B-4A92-B9BF-AC168E150E30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7A81B2FD-A6EF-4AAF-8BB0-DD8ABA98126F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A81B2FD-A6EF-4AAF-8BB0-DD8ABA98126F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A81B2FD-A6EF-4AAF-8BB0-DD8ABA98126F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08BF54CB-847B-4A92-B9BF-AC168E150E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08BF54CB-847B-4A92-B9BF-AC168E150E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08BF54CB-847B-4A92-B9BF-AC168E150E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08BF54CB-847B-4A92-B9BF-AC168E150E30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,6 +24,7 @@ namespace Manager.Model
         public bool VM_IsDel { get; set; }
         public System.Guid VM_Agent { get; set; }
     
+        public virtual AgentServer AgentServer { get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Common.Logger;
 using Common.Message;
-using Manager.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,13 +39,9 @@ namespace Manager.BLL
                     {
                         try
                         {
-                            SystemResponseMessage response = null;
                             //调用接口获取VM系统信息
-                            using (ChannelFactory<IVMSystem> channelFactory = new ChannelFactory<IVMSystem>("VMSystem"))
-                            {
-                                IVMSystem proxy = channelFactory.CreateChannel(endpoint);
-                                response = proxy.GetSystemStatus(request);
-                            }
+                            Manager.AgentServices.VMSystem systemServices = new Manager.AgentServices.VMSystem(endpoint);
+                            SystemResponseMessage response = systemServices.GetSystemStatus(request);
                             lock (this.syncRoot)
                             {
                                 message.MyActiveSystemCount += response.SystemInfo.Where(d => (bool)d.Value).Count();
@@ -75,8 +70,6 @@ namespace Manager.BLL
                 {
                     Thread.Sleep(100);
                 }
-                //message.ActiveSystem = 10;
-                //message.ShutdownSystemCount = 12;
             }
             catch (Exception e)
             {
@@ -104,18 +97,12 @@ namespace Manager.BLL
                     {
                         try
                         {
-                            SystemInfoResponseMessage response = null;
                             //调用接口获取VM系统信息
-                            using (ChannelFactory<IVMSystem> channelFactory = new ChannelFactory<IVMSystem>("VMSystem"))
-                            {
-                                IVMSystem proxy = channelFactory.CreateChannel(endpoint);
-                                response = proxy.GetSystemInfo(request);
-                            }
-                            lock (this.syncRoot)
-                            {
-                                SystemInfoMessage.VMSystem vmSystemMessageObject = new SystemInfoMessage.VMSystem();
-                                //TODO
-                            }
+                            Manager.AgentServices.VMSystem systemServices = new Manager.AgentServices.VMSystem(endpoint);
+                            SystemInfoResponseMessage response = systemServices.GetSystemInfo(request);
+
+                            SystemInfoMessage.VMSystem vmSystemMessageObject = new SystemInfoMessage.VMSystem();
+                            //vmSystemMessageObject.CreateTime = response.VMSystyems
                         }
                         catch (TimeoutException e)
                         {
@@ -158,6 +145,7 @@ namespace Manager.BLL
             {
 
             }
+            return null;
         }
     }
 }

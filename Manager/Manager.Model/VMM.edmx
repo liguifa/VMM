@@ -55,6 +55,7 @@
           <Property Name="VM_CreateTime" Type="datetime" Nullable="false" />
           <Property Name="VM_OperationTime" Type="datetime" Nullable="false" />
           <Property Name="VM_IsDel" Type="bit" Nullable="false" />
+          <Property Name="VM_Agent" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <Association Name="FK_Users_Jurisdictions">
           <End Role="Jurisdictions" Type="Self.Jurisdictions" Multiplicity="1" />
@@ -65,6 +66,18 @@
             </Principal>
             <Dependent Role="Users">
               <PropertyRef Name="User_Jurisdiction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VMs_AgentServers">
+          <End Role="AgentServers" Type="Self.AgentServers" Multiplicity="1" />
+          <End Role="VMs" Type="Self.VMs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentServers">
+              <PropertyRef Name="AgentServer_Id" />
+            </Principal>
+            <Dependent Role="VMs">
+              <PropertyRef Name="VM_Agent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -80,6 +93,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="VMMModelStoreContainer">
           <EntitySet Name="AgentServers" EntityType="Self.AgentServers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jurisdictions" EntityType="Self.Jurisdictions" Schema="dbo" store:Type="Tables" />
@@ -89,6 +133,10 @@
           <AssociationSet Name="FK_Users_Jurisdictions" Association="Self.FK_Users_Jurisdictions">
             <End Role="Jurisdictions" EntitySet="Jurisdictions" />
             <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VMs_AgentServers" Association="Self.FK_VMs_AgentServers">
+            <End Role="AgentServers" EntitySet="AgentServers" />
+            <End Role="VMs" EntitySet="VMs" />
           </AssociationSet>
           <AssociationSet Name="FK_VMs_Users" Association="Self.FK_VMs_Users">
             <End Role="Users" EntitySet="Users" />
@@ -128,22 +176,7 @@
           <Property Name="User_Jurisdiction" Type="Guid" Nullable="false" />
           <Property Name="User_IsDel" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Jurisdiction" Relationship="Self.FK_Users_Jurisdictions" FromRole="Users" ToRole="Jurisdictions" />
-          <NavigationProperty Name="VMs" Relationship="Self.FK_VMs_Users" FromRole="Users" ToRole="VMs" />
-        </EntityType>
-        <EntityType Name="VM">
-          <Key>
-            <PropertyRef Name="VM_Id" />
-          </Key>
-          <Property Name="VM_Id" Type="Guid" Nullable="false" />
-          <Property Name="VM_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="VM_System" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="VM_User" Type="Guid" Nullable="false" />
-          <Property Name="VM_CreateUser" Type="Guid" Nullable="false" />
-          <Property Name="VM_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="VM_OperationTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="VM_IsDel" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_VMs_Users" FromRole="VMs" ToRole="Users" />
-          <Property Name="VM_Agent" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="VMs" Relationship="VMMModel.FK_VMs_Users" FromRole="User" ToRole="VM" />
         </EntityType>
         <Association Name="FK_Users_Jurisdictions">
           <End Role="Jurisdictions" Type="Self.Jurisdiction" Multiplicity="1" />
@@ -157,30 +190,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VMs_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="VMs" Type="Self.VM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="User_Id" />
-            </Principal>
-            <Dependent Role="VMs">
-              <PropertyRef Name="VM_User" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="VMMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Jurisdictions" EntityType="Self.Jurisdiction" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="VMs" EntityType="Self.VM" />
           <AssociationSet Name="FK_Users_Jurisdictions" Association="Self.FK_Users_Jurisdictions">
             <End Role="Jurisdictions" EntitySet="Jurisdictions" />
             <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VMs_Users" Association="Self.FK_VMs_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="VMs" EntitySet="VMs" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -212,13 +228,63 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="sp_alterdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(VMMModel.sp_helpdiagramdefinition1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(VMMModel.sp_helpdiagrams1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams1" />
           <EntitySet Name="AgentServers" EntityType="VMMModel.AgentServer" />
+          <EntitySet Name="VMs" EntityType="VMMModel.VM" />
+          <AssociationSet Name="FK_VMs_AgentServers" Association="VMMModel.FK_VMs_AgentServers">
+            <End Role="AgentServer" EntitySet="AgentServers" />
+            <End Role="VM" EntitySet="VMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VMs_Users" Association="VMMModel.FK_VMs_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="VM" EntitySet="VMs" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition1_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams1_Result">
           <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -234,7 +300,48 @@
           <Property Name="AgentServer_Port" Type="Int32" Nullable="false" />
           <Property Name="AgentServer_Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AgentServer_IsDel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="VMs" Relationship="VMMModel.FK_VMs_AgentServers" FromRole="AgentServer" ToRole="VM" />
         </EntityType>
+        <EntityType Name="VM">
+          <Key>
+            <PropertyRef Name="VM_Id" />
+          </Key>
+          <Property Name="VM_Id" Type="Guid" Nullable="false" />
+          <Property Name="VM_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VM_System" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VM_User" Type="Guid" Nullable="false" />
+          <Property Name="VM_CreateUser" Type="Guid" Nullable="false" />
+          <Property Name="VM_CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VM_OperationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VM_IsDel" Type="Boolean" Nullable="false" />
+          <Property Name="VM_Agent" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="AgentServer" Relationship="VMMModel.FK_VMs_AgentServers" FromRole="VM" ToRole="AgentServer" />
+          <NavigationProperty Name="User" Relationship="VMMModel.FK_VMs_Users" FromRole="VM" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_VMs_AgentServers">
+          <End Type="VMMModel.AgentServer" Role="AgentServer" Multiplicity="1" />
+          <End Type="VMMModel.VM" Role="VM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentServer">
+              <PropertyRef Name="AgentServer_Id" />
+            </Principal>
+            <Dependent Role="VM">
+              <PropertyRef Name="VM_Agent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VMs_Users">
+          <End Type="VMMModel.User" Role="User" Multiplicity="1" />
+          <End Type="VMMModel.VM" Role="VM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="VM">
+              <PropertyRef Name="VM_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -272,20 +379,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VMs">
-            <EntityTypeMapping TypeName="VMMModel.VM">
-              <MappingFragment StoreEntitySet="VMs">
-                <ScalarProperty Name="VM_Id" ColumnName="VM_Id" />
-                <ScalarProperty Name="VM_Name" ColumnName="VM_Name" />
-                <ScalarProperty Name="VM_System" ColumnName="VM_System" />
-                <ScalarProperty Name="VM_User" ColumnName="VM_User" />
-                <ScalarProperty Name="VM_CreateUser" ColumnName="VM_CreateUser" />
-                <ScalarProperty Name="VM_CreateTime" ColumnName="VM_CreateTime" />
-                <ScalarProperty Name="VM_OperationTime" ColumnName="VM_OperationTime" />
-                <ScalarProperty Name="VM_IsDel" ColumnName="VM_IsDel" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="VMMModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="VMMModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="VMMModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition1" FunctionName="VMMModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VMMModel.sp_helpdiagramdefinition1_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="VMMModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VMMModel.sp_helpdiagrams1_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="VMMModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="VMMModel.Store.sp_upgraddiagrams" />
           <EntitySetMapping Name="AgentServers">
             <EntityTypeMapping TypeName="VMMModel.AgentServer">
               <MappingFragment StoreEntitySet="AgentServers">
@@ -294,6 +411,21 @@
                 <ScalarProperty Name="AgentServer_Port" ColumnName="AgentServer_Port" />
                 <ScalarProperty Name="AgentServer_Address" ColumnName="AgentServer_Address" />
                 <ScalarProperty Name="AgentServer_Id" ColumnName="AgentServer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VMs">
+            <EntityTypeMapping TypeName="VMMModel.VM">
+              <MappingFragment StoreEntitySet="VMs">
+                <ScalarProperty Name="VM_Agent" ColumnName="VM_Agent" />
+                <ScalarProperty Name="VM_IsDel" ColumnName="VM_IsDel" />
+                <ScalarProperty Name="VM_OperationTime" ColumnName="VM_OperationTime" />
+                <ScalarProperty Name="VM_CreateTime" ColumnName="VM_CreateTime" />
+                <ScalarProperty Name="VM_CreateUser" ColumnName="VM_CreateUser" />
+                <ScalarProperty Name="VM_User" ColumnName="VM_User" />
+                <ScalarProperty Name="VM_System" ColumnName="VM_System" />
+                <ScalarProperty Name="VM_Name" ColumnName="VM_Name" />
+                <ScalarProperty Name="VM_Id" ColumnName="VM_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

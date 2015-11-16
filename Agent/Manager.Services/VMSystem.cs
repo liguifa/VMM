@@ -26,6 +26,22 @@ namespace Manager.Services
 
         public SystemInfoResponseMessage GetSystemInfo(SystemInfoRequestMessage request)
         {
+            //TODO   现在是模拟数据
+            SystemInfoResponseMessage response = new SystemInfoResponseMessage();
+            foreach (string vmSystemName in request.Names)
+            {
+                SystemInfoResponseMessage.VMSystem vmSystem = new SystemInfoResponseMessage.VMSystem();
+                vmSystem.Status = true;
+                vmSystem.Name = vmSystemName;
+                vmSystem.CreateTime = "2012/12/12";
+                vmSystem.LastOperationTime = "2013/11/11";
+                response.VMSystyems.Add(vmSystem);
+            }
+            return response;
+        }
+
+        public SystemActiveResponseMessage ActiveSystem(SystemActiveRequestMessage request)
+        {
             //TODO
             return null;
         }

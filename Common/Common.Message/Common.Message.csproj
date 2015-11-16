@@ -45,6 +45,8 @@
     <Compile Include="DashboardMessage.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemActiveRequestMessage.cs" />
+    <Compile Include="SystemActiveResponseMessage.cs" />
     <Compile Include="SystemInfoRequestMessage.cs" />
     <Compile Include="SystemInfoResponseMessage.cs" />
     <Compile Include="SystemRequestMessage.cs" />

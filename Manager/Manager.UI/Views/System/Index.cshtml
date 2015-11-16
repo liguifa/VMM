@@ -44,7 +44,7 @@
             <span class="win-label">详细</span>
         </button>
     </div>
-   
+
     <a class="win-command nav-page-buttom" href="#">
         <span class="win-commandicon win-commandring icon-arrow-right-11"></span>
         <span class="win-label">下一页</span>
@@ -66,7 +66,7 @@
         </tr>
     </thead>
     <tbody>
-        @for (int i = 1; i <= 8; i++)
+        @foreach (Common.Message.SystemInfoMessage.VMSystem vmSystem in (ViewBag.vmSystem as Common.Message.SystemInfoMessage).VMSystyems)
         {
             <tr>
                 <td class="align-center">
@@ -74,14 +74,31 @@
                         <input type="checkbox"><span class="metro-checkbox"></span>
                     </label>
                 </td>
-                <td class="align-center">@i</td>
-                <td class="align-center">VM2015110709029988</td>
-                <td class="align-center">Windows 10</td>
-                <td class="align-center">2015-11-07 09:03</td>
-                <td class="align-center">2015-11-07 09:03</td>
-                <td class="align-center">开机</td>
+                <td class="align-center"></td>
+                <td class="align-center">@vmSystem.Name</td>
+                <td class="align-center">@vmSystem.System</td>
+                <td class="align-center">@vmSystem.CreateTime</td>
+                <td class="align-center">@vmSystem.LastOperationTime</td>
+                <td class="align-center">@vmSystem.Status</td>
                 <td class="align-center"></td>
             </tr>
         }
+        @*@for (int i = 1; i <= 8; i++)
+            {
+                <tr>
+                    <td class="align-center">
+                        <label class="checkbox">
+                            <input type="checkbox"><span class="metro-checkbox"></span>
+                        </label>
+                    </td>
+                    <td class="align-center">@i</td>
+                    <td class="align-center">VM2015110709029988</td>
+                    <td class="align-center">Windows 10</td>
+                    <td class="align-center">2015-11-07 09:03</td>
+                    <td class="align-center">2015-11-07 09:03</td>
+                    <td class="align-center">开机</td>
+                    <td class="align-center"></td>
+                </tr>
+            }*@
     </tbody>
 </table>

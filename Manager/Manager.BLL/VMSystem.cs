@@ -134,18 +134,46 @@ namespace Manager.BLL
             return message;
         }
 
-        public SysytemActiveMessage ActiveSystem(Guid AgentId, string vnName)
+        public SysytemActiveMessage ActiveSystem(List<string> vmNames)
         {
             try
             {
-                Manager.Model.AgentServer agentServer = new AgentServer().GetAgentServer(AgentId);
-                //TODO
+                Manager.Model.AgentServer agentServer = new AgentServer().GetAgentServer(vmNames);
+
             }
             catch (Exception e)
             {
 
             }
             return null;
+        }
+
+        private void GetVMSystemGroup(List<string> vmNames)
+        {
+            Dictionary<Guid, List<string>> vmSystemGroup = new Dictionary<Guid, List<string>>();
+            foreach (string name in vmNames)
+            {
+                List<Manager.Model.VM> vmSystems = base.Search(d => d.VM_Name == name && !d.VM_IsDel);
+                if (vmSystems.Count == 1)
+                {
+                    if (vmSystemGroup.Keys.Contains(vmSystems[0].VM_Agent))
+                    {
+
+                    }
+                    else
+                    { 
+                        vmSystemGroup.Add(vm)
+                    }
+                }
+                else if (vmSystems.Count > 1)
+                {
+                    Logger.Instance(typeof(VMSystem)).Warn("");
+                }
+                else
+                {
+                    Logger.Instance(typeof(VMSystem)).Error("");
+                }
+            }
         }
     }
 }

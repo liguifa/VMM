@@ -19,6 +19,8 @@ namespace Common.Message
             public string CreateTime { get; set; }
 
             public string LastOperationTime { get; set; }
+
+            public string System { get; set; }
         }
     }
 }

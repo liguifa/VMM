@@ -16,5 +16,8 @@ namespace Manager.Contract
 
         [OperationContract]
         SystemInfoResponseMessage GetSystemInfo(SystemInfoRequestMessage request);
+
+        [OperationContract]
+        SystemActiveResponseMessage ActiveSystem(SystemActiveRequestMessage request);
     }
 }

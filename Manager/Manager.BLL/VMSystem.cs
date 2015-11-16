@@ -138,8 +138,15 @@ namespace Manager.BLL
         {
             try
             {
-                Manager.Model.AgentServer agentServer = new AgentServer().GetAgentServer(vmNames);
+                Dictionary<Guid, List<string>> vmSystemGroup = this.GetVMSystemGroup(vmNames);
+                foreach (var item in vmSystemGroup)
+                {
+                    SystemActiveRequestMessage request = new SystemActiveRequestMessage();
+                    request.Names = item.Value;
 
+                    EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
+
+                }
             }
             catch (Exception e)
             {
@@ -148,32 +155,33 @@ namespace Manager.BLL
             return null;
         }
 
-        private void GetVMSystemGroup(List<string> vmNames)
+        private Dictionary<Guid, List<string>> GetVMSystemGroup(List<string> vmNames)
         {
             Dictionary<Guid, List<string>> vmSystemGroup = new Dictionary<Guid, List<string>>();
             foreach (string name in vmNames)
             {
                 List<Manager.Model.VM> vmSystems = base.Search(d => d.VM_Name == name && !d.VM_IsDel);
-                if (vmSystems.Count == 1)
+                if (vmSystems.Count >= 1)
                 {
+                    if (vmSystems.Count > 1)
+                    {
+                        Logger.Instance(typeof(VMSystem)).Warn("");
+                    }
                     if (vmSystemGroup.Keys.Contains(vmSystems[0].VM_Agent))
                     {
-
+                        vmSystemGroup[vmSystems[0].VM_Agent].Add(vmSystems[0].VM_Name);
                     }
                     else
-                    { 
-                        vmSystemGroup.Add(vm)
+                    {
+                        vmSystemGroup.Add(vmSystems[0].VM_Agent, new List<string>() { vmSystems[0].VM_Name });
                     }
-                }
-                else if (vmSystems.Count > 1)
-                {
-                    Logger.Instance(typeof(VMSystem)).Warn("");
                 }
                 else
                 {
                     Logger.Instance(typeof(VMSystem)).Error("");
                 }
             }
+            return vmSystemGroup;
         }
     }
 }

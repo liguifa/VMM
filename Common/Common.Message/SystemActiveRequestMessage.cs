@@ -11,6 +11,6 @@ namespace Common.Message
     public class SystemActiveRequestMessage : Message
     {
         [DataMember]
-        public List<string> Names = new List<string>();
+        public List<string> Names { get; set; }
     }
 }

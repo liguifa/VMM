@@ -1,5 +1,6 @@
 ﻿using Common.Logger;
 using Common.Message;
+using Common.SmartThread;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,17 +29,17 @@ namespace Manager.BLL
                 SystemRquestMessage request = new SystemRquestMessage();
                 //查询AgentServer列表
                 List<Manager.Model.AgentServer> agentServers = new AgentServer().GetAgentServer();
-                List<Thread> serverThread = new List<Thread>();
+                SmartThread smartThread = new SmartThread();
                 foreach (Manager.Model.AgentServer agentServer in agentServers)
                 {
-                    //查询VM系统列表
-                    request.Names = base.Search(d => d.VM_User == id && !d.VM_IsDel && d.VM_Agent == agentServer.AgentServer_Id).Select(d => d.VM_Name).ToList(); ;
-                    request.Key = agentServer.AgentServer_Key;
-                    EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
-                    Thread thread = new Thread(() =>
+                    smartThread.Invoke((args) =>
                     {
                         try
                         {
+                            //查询VM系统列表
+                            request.Names = base.Search(d => d.VM_User == id && !d.VM_IsDel && d.VM_Agent == agentServer.AgentServer_Id).Select(d => d.VM_Name).ToList(); ;
+                            request.Key = agentServer.AgentServer_Key;
+                            EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
                             //调用接口获取VM系统信息
                             Manager.AgentServices.VMSystem systemServices = new Manager.AgentServices.VMSystem(endpoint);
                             SystemResponseMessage response = systemServices.GetSystemStatus(request);
@@ -61,15 +62,9 @@ namespace Manager.BLL
                             Logger.Instance(typeof(VMSystem)).Error(e.Message);
                         }
                     });
-                    thread.Start();
-                    serverThread.Add(thread);
                 }
-                DateTime currentTime = DateTime.Now;
                 //等待获取VM系统信息的线程全部结束 最大等待时间为30分钟
-                while (serverThread.Where(d => d.IsAlive).Count() > 0 && currentTime.AddMinutes(30) > DateTime.Now)
-                {
-                    Thread.Sleep(100);
-                }
+                smartThread.Wait(1800);
             }
             catch (Exception e)
             {
@@ -86,17 +81,17 @@ namespace Manager.BLL
                 //查询AgentServer列表
                 List<Manager.Model.AgentServer> agentServers = new AgentServer().GetAgentServer();
                 SystemInfoRequestMessage request = new SystemInfoRequestMessage();
-                List<Thread> serverThread = new List<Thread>();
+                SmartThread smartThread = new SmartThread();
                 foreach (Manager.Model.AgentServer agentServer in agentServers)
                 {
-                    //查询VM系统列表
-                    request.Names = base.Search(d => d.VM_User == id && !d.VM_IsDel && d.VM_Agent == agentServer.AgentServer_Id).Select(d => d.VM_Name).ToList(); ;
-                    //request.Key = agentServer.AgentServer_Key;
-                    EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
-                    Thread thread = new Thread(() =>
+                    smartThread.Invoke((args) =>
                     {
                         try
                         {
+                            //查询VM系统列表
+                            request.Names = base.Search(d => d.VM_User == id && !d.VM_IsDel && d.VM_Agent == agentServer.AgentServer_Id).Select(d => d.VM_Name).ToList(); ;
+                            //request.Key = agentServer.AgentServer_Key;
+                            EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
                             //调用接口获取VM系统信息
                             Manager.AgentServices.VMSystem systemServices = new Manager.AgentServices.VMSystem(endpoint);
                             SystemInfoResponseMessage response = systemServices.GetSystemInfo(request);
@@ -117,15 +112,9 @@ namespace Manager.BLL
                             Logger.Instance(typeof(VMSystem)).Error(e.Message);
                         }
                     });
-                    thread.Start();
-                    serverThread.Add(thread);
                 }
-                DateTime currentTime = DateTime.Now;
                 //等待获取VM系统信息的线程全部结束 最大等待时间为30分钟
-                while (serverThread.Where(d => d.IsAlive).Count() > 0 && currentTime.AddMinutes(30) > DateTime.Now)
-                {
-                    Thread.Sleep(100);
-                }
+                smartThread.Wait(1800);
             }
             catch (Exception e)
             {
@@ -136,23 +125,47 @@ namespace Manager.BLL
 
         public SysytemActiveMessage ActiveSystem(List<string> vmNames)
         {
+            SysytemActiveMessage message = new SysytemActiveMessage();
             try
             {
                 Dictionary<Guid, List<string>> vmSystemGroup = this.GetVMSystemGroup(vmNames);
+                SmartThread smartThread = new SmartThread();
                 foreach (var item in vmSystemGroup)
                 {
-                    SystemActiveRequestMessage request = new SystemActiveRequestMessage();
-                    request.Names = item.Value;
+                    smartThread.Invoke((args) =>
+                    {
+                        Manager.Model.AgentServer agentServer = new AgentServer().GetAgentServer(item.Key);
+                        try
+                        {
 
-                    EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
+                            SystemActiveRequestMessage request = new SystemActiveRequestMessage();
+                            request.Names = item.Value;
+                            EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
+                            Manager.AgentServices.VMSystem vmSystem = new AgentServices.VMSystem(endpoint);
+                            SystemActiveResponseMessage response = vmSystem.ActiveSystem(request);
 
+                        }
+                        catch (TimeoutException e)
+                        {
+                            Logger.Instance(typeof(VMSystem)).Error(string.Format("线程超时,Thread Name:{0},{1}", Thread.CurrentThread.Name, e.Message));
+                        }
+                        catch (CommunicationException e)
+                        {
+                            Logger.Instance(typeof(VMSystem)).Error(string.Format("WCF通信异常,{0}:{1},{2}", agentServer.AgentServer_Address, agentServer.AgentServer_Port, e.Message));
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Instance(typeof(VMSystem)).Error(e.Message);
+                        }
+                    });
                 }
+                smartThread.Wait();
             }
             catch (Exception e)
             {
-
+                Logger.Instance(typeof(VMSystem)).Error(e.Message);
             }
-            return null;
+            return message;
         }
 
         private Dictionary<Guid, List<string>> GetVMSystemGroup(List<string> vmNames)

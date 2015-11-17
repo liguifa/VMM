@@ -59,6 +59,10 @@
       <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
       <Name>Common.Message</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Thread\Common.Thread.csproj">
+      <Project>{533ff6c5-b27e-4a62-9ff1-c6471bddb60e}</Project>
+      <Name>Common.Thread</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Manager.AgentServices\Manager.AgentServices.csproj">
       <Project>{6dfcf662-c1bd-45a8-89d8-d466b8624108}</Project>
       <Name>Manager.AgentServices</Name>

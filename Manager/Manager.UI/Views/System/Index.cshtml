@@ -15,7 +15,7 @@
             <span class="win-commandicon win-commandring icon-play"></span>
             <span class="win-label">开机</span>
         </button>
-        <button class="win-command">
+        <button class="win-command Active-Command">
             <span class="win-commandicon win-commandring  icon-stop"></span>
             <span class="win-label">关机</span>
         </button>
@@ -68,7 +68,7 @@
     <tbody>
         @foreach (Common.Message.SystemInfoMessage.VMSystem vmSystem in (ViewBag.vmSystem as Common.Message.SystemInfoMessage).VMSystyems)
         {
-            <tr>
+            <tr id="@vmSystem.Name">
                 <td class="align-center">
                     <label class="checkbox">
                         <input type="checkbox"><span class="metro-checkbox"></span>

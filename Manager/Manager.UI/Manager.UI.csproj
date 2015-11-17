@@ -169,6 +169,7 @@
     <Content Include="Static\Highcharts\highcharts.js" />
     <Content Include="Static\Js\jquery-2.1.4.min.js" />
     <Content Include="Static\Js\Login.js" />
+    <Content Include="Static\Js\System.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

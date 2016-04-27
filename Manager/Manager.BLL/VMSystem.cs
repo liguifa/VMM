@@ -73,7 +73,7 @@ namespace Manager.BLL
             return message;
         }
 
-        public SystemInfoMessage GetVMSystemInfo(Guid id)
+        public SystemInfoMessage GetVMSystemInfo(Guid id, int pageIndex = 1, int pageSize = 16)
         {
             SystemInfoMessage message = new SystemInfoMessage();
             try
@@ -94,10 +94,20 @@ namespace Manager.BLL
                             EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
                             //调用接口获取VM系统信息
                             Manager.AgentServices.VMSystem systemServices = new Manager.AgentServices.VMSystem(endpoint);
+                            request.pageSize = pageSize;
+                            request.pageIndex = pageIndex;
                             SystemInfoResponseMessage response = systemServices.GetSystemInfo(request);
-
-                            SystemInfoMessage.VMSystem vmSystemMessageObject = new SystemInfoMessage.VMSystem();
-                            //vmSystemMessageObject.CreateTime = response.VMSystyems
+                            message.VMSystyems = new List<SystemInfoMessage.VMSystem>();
+                            foreach (var system in response.VMSystyems)
+                            {
+                                message.VMSystyems.Add(new SystemInfoMessage.VMSystem()
+                                {
+                                    Name = system.Name,
+                                    CreateTime = system.CreateTime,
+                                    LastOperationTime = system.LastOperationTime,
+                                    Status = system.Status
+                                });
+                            }
                         }
                         catch (TimeoutException e)
                         {

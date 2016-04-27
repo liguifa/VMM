@@ -14,7 +14,7 @@ namespace Common.Message
         {
             public string Name { get; set; }
 
-            public bool Status { get; set; }
+            public string Status { get; set; }
 
             public string CreateTime { get; set; }
 

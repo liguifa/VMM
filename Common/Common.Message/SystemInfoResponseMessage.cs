@@ -20,7 +20,7 @@ namespace Common.Message
             public string Name { get; set; }
 
             [DataMember]
-            public bool Status { get; set; }
+            public string Status { get; set; }
 
             [DataMember]
             public string CreateTime { get; set; }

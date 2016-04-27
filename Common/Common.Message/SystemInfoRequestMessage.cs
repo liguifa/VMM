@@ -12,5 +12,11 @@ namespace Common.Message
     {
         [DataMember]
         public List<string> Names { get; set; }
+
+        [DataMember]
+        public int pageIndex { get; set; }
+
+        [DataMember]
+        public int pageSize { get; set; }
     }
 }

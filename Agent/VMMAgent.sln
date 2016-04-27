@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{248D8432-8DD2-49CC-9E20-34295C942853}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.Contract", "Manager.Contract\Agent.Contract.csproj", "{CFC194D6-31ED-4AA6-AE5F-65C5555E6657}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.Services", "Manager.Services\Agent.Services.csproj", "{24421224-813B-4786-BCDB-B715A6E5DE29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Function", "..\Common\Common.Function\Common.Function.csproj", "{1E0B34A5-233D-45F7-933D-51B71BE3D62E}"
 EndProject
@@ -15,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logger", "..\Common\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Message", "..\Common\Common.Message\Common.Message.csproj", "{15CBBF22-6CCE-47D6-9765-283CD7B1DBE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.Install", "Agent.Install\Agent.Install.csproj", "{A8887F2F-7D94-458B-87A3-E2301F647D32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager.HyperV", "Manager.HyperV\Manager.HyperV.csproj", "{F75711B1-012A-4082-8BF9-456159C60E76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		{CFC194D6-31ED-4AA6-AE5F-65C5555E6657}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFC194D6-31ED-4AA6-AE5F-65C5555E6657}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFC194D6-31ED-4AA6-AE5F-65C5555E6657}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24421224-813B-4786-BCDB-B715A6E5DE29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24421224-813B-4786-BCDB-B715A6E5DE29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24421224-813B-4786-BCDB-B715A6E5DE29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24421224-813B-4786-BCDB-B715A6E5DE29}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1E0B34A5-233D-45F7-933D-51B71BE3D62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E0B34A5-233D-45F7-933D-51B71BE3D62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E0B34A5-233D-45F7-933D-51B71BE3D62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,10 +37,10 @@ Global
 		{15CBBF22-6CCE-47D6-9765-283CD7B1DBE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15CBBF22-6CCE-47D6-9765-283CD7B1DBE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15CBBF22-6CCE-47D6-9765-283CD7B1DBE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A8887F2F-7D94-458B-87A3-E2301F647D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8887F2F-7D94-458B-87A3-E2301F647D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8887F2F-7D94-458B-87A3-E2301F647D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8887F2F-7D94-458B-87A3-E2301F647D32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F75711B1-012A-4082-8BF9-456159C60E76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F75711B1-012A-4082-8BF9-456159C60E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F75711B1-012A-4082-8BF9-456159C60E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F75711B1-012A-4082-8BF9-456159C60E76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

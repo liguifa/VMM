@@ -20,10 +20,10 @@ namespace Manager.UI.Controllers
             return View();
         }
 
-        public JsonResult Active(string names)
-        {
-            
-            return Json(new VMSystem().ActiveSystem(names));
-        }
+        //public JsonResult Active(string names)
+        //{
+
+        //    return Json(new VMSystem().ActiveSystem(names));
+        //}
     }
 }

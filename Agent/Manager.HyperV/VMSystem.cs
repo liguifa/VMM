@@ -28,7 +28,7 @@ namespace Manager.HyperV
         {
             List<SystemInfoResponseMessage.VMSystem> outSystems = new List<SystemInfoResponseMessage.VMSystem>();
             object syncRoot = new object();
-            Parallel.ForEach(Config.GetInstance().Machines, machine =>
+            Parallel.ForEach(Config.GetInstance("hyperv.config").Machines, machine =>
             {
                 HyperVManager manager = new HyperVManager(machine.Username, machine.Password, machine.Address);
                 List<SystemInfoResponseMessage.VMSystem> systems = manager.GetVMSystems();

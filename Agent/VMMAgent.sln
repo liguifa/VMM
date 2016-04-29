@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logger", "..\Common\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Message", "..\Common\Common.Message\Common.Message.csproj", "{15CBBF22-6CCE-47D6-9765-283CD7B1DBE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager.HyperV", "Manager.HyperV\Manager.HyperV.csproj", "{F75711B1-012A-4082-8BF9-456159C60E76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.HyperV", "Manager.HyperV\Agent.HyperV.csproj", "{F75711B1-012A-4082-8BF9-456159C60E76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agent.VMware", "Agent.VMware\Agent.VMware.csproj", "{1F13E11F-0F15-4EA9-9B00-0C41FD6C7E01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{F75711B1-012A-4082-8BF9-456159C60E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F75711B1-012A-4082-8BF9-456159C60E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F75711B1-012A-4082-8BF9-456159C60E76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F13E11F-0F15-4EA9-9B00-0C41FD6C7E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F13E11F-0F15-4EA9-9B00-0C41FD6C7E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F13E11F-0F15-4EA9-9B00-0C41FD6C7E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F13E11F-0F15-4EA9-9B00-0C41FD6C7E01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

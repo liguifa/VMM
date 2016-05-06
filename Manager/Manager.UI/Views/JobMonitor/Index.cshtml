@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.basic.cshtml";
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="align-center">选择</th>
+            <th class="align-center">序号</th>
+            <th class="align-center">ID</th>
+            <th class="align-center">进度</th>
+            <th class="align-center">消息</th>
+            <th class="align-center">备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Manager.BLL.JobModel job in ViewBag.jobs as List<Manager.BLL.JobModel>)
+        {
+            <tr id="@job.Id">
+                <td class="align-center">
+                    <label class="checkbox">
+                        <input type="checkbox" class="sys_id" value="" data-sysname="@job.Id"><span class="metro-checkbox"></span>
+                    </label>
+                </td>
+                <td class="align-center"></td>
+                <td class="align-center">@job.Id</td>
+                <td class="align-center">@job.Progress</td>
+                <td class="align-center">@job.Commit</td>
+                <td class="align-center"></td>
+            </tr>
+        }
+    </tbody>
+</table>

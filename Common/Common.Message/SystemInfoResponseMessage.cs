@@ -23,6 +23,12 @@ namespace Common.Message
             public string Status { get; set; }
 
             [DataMember]
+            public string Cpu { get; set; }
+
+            [DataMember]
+            public string Memory { get; set; }
+
+            [DataMember]
             public string CreateTime { get; set; }
 
             [DataMember]

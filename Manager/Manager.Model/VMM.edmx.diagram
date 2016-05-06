@@ -4,15 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7ff1bef5cb9a42c49cde1d408cdad2b3" Name="Diagram1">
-        <EntityTypeShape EntityType="VMMModel.Jurisdiction" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="VMMModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VMMModel.User" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="ba2377d922bd4651b82527dea9a286db" Name="Diagram1">
+        <EntityTypeShape EntityType="VMMModel.AgentServer" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VMMModel.JobReport" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VMMModel.Job" Width="1.5" PointX="5.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="VMMModel.Jurisdiction" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VMMModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VMMModel.User" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VMMModel.VM" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="VMMModel.FK_VMs_AgentServers" ManuallyRouted="false" />
+        <AssociationConnector Association="VMMModel.FK_JobReports_Jobs1" ManuallyRouted="false" />
         <AssociationConnector Association="VMMModel.FK_Users_Jurisdictions" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="VMMModel.AgentServer" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="VMMModel.VM" Width="1.5" PointX="5.25" PointY="0.75" />
-        <AssociationConnector Association="VMMModel.FK_VMs_AgentServers" />
-        <AssociationConnector Association="VMMModel.FK_VMs_Users" />
+        <AssociationConnector Association="VMMModel.FK_VMs_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -16,14 +16,19 @@ namespace Manager.UI.Controllers
         [UserAuthorization("user")]
         public ActionResult Index()
         {
-            ViewBag.vmSystem = new VMSystem().GetVMSystemInfo(Guid.Parse(Session["user"].ToString()));
             return View();
         }
 
-        //public JsonResult Active(string names)
-        //{
+        [UserAuthorization("user")]
+        public PartialViewResult SystemInfo()
+        {
+            ViewBag.vmSystem = new VMSystem().GetVMSystemInfo(Guid.Parse(Session["user"].ToString()));
+            return PartialView();
+        }
 
-        //    return Json(new VMSystem().ActiveSystem(names));
-        //}
+        public JsonResult ActiveSystem(string names)
+        {
+            return Json(new VMSystem().ActiveSystem(names.Split(',').ToList()));
+        }
     }
 }

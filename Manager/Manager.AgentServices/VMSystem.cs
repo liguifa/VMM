@@ -42,13 +42,16 @@ namespace Manager.AgentServices
 
         public SystemActiveResponseMessage ActiveSystem(SystemActiveRequestMessage request)
         {
-            SystemActiveResponseMessage response = null;
-            using (ChannelFactory<IVMSystem> channelFactory = new ChannelFactory<IVMSystem>("VMSystem"))
+            Task.Run(() =>
             {
-                IVMSystem proxy = channelFactory.CreateChannel(this.endpoint);
-                response = proxy.ActiveSystem(request);
-            }
-            return response;
+                SystemActiveResponseMessage response = null;
+                using (ChannelFactory<IVMSystem> channelFactory = new ChannelFactory<IVMSystem>("VMSystem"))
+                {
+                    IVMSystem proxy = channelFactory.CreateChannel(this.endpoint);
+                    response = proxy.ActiveSystem(request);
+                }
+            });
+            return new SystemActiveResponseMessage();
         }
     }
 }

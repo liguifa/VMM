@@ -10,13 +10,19 @@
 namespace Manager.Model
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams1_Result
+    public partial class Job
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public Job()
+        {
+            this.JobReports = new HashSet<JobReport>();
+        }
+    
+        public System.Guid Job_Id { get; set; }
+        public int Job_Type { get; set; }
+        public bool Job_Status { get; set; }
+    
+        public virtual ICollection<JobReport> JobReports { get; set; }
     }
 }

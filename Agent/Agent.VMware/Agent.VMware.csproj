@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\Vim25Service.XmlSerializers.dll</HintPath>
     </Reference>
+    <Reference Include="VMware.Vim, Version=6.0.0.0, Culture=neutral, PublicKeyToken=10980b081e887e9f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\VMware\Infrastructure\vSphere PowerCLI\VMware.Vim.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -84,6 +88,10 @@
     <ProjectReference Include="..\..\Common\Common.Message\Common.Message.csproj">
       <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
       <Name>Common.Message</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Manager\Manager.TimrContract\Manager.TimrContract.csproj">
+      <Project>{c4068c34-793c-4e13-9ab1-bebbbf2744cf}</Project>
+      <Name>Manager.TimrContract</Name>
     </ProjectReference>
     <ProjectReference Include="..\Manager.Contract\Agent.Contract.csproj">
       <Project>{cfc194d6-31ed-4aa6-ae5f-65c5555e6657}</Project>

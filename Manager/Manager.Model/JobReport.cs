@@ -10,10 +10,15 @@
 namespace Manager.Model
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition1_Result
+    public partial class JobReport
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public System.Guid JobReport_Id { get; set; }
+        public System.Guid JobReport_JobId { get; set; }
+        public int JobReport_Progress { get; set; }
+        public string JobReport_Commit { get; set; }
+    
+        public virtual Job Job { get; set; }
     }
 }

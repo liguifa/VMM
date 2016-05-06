@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobMonitorController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,6 +168,7 @@
     <Content Include="Static\Css\layout.css" />
     <Content Include="Static\Css\Login.css" />
     <Content Include="Static\Highcharts\highcharts.js" />
+    <Content Include="Static\Images\loading.gif" />
     <Content Include="Static\Js\jquery-2.1.4.min.js" />
     <Content Include="Static\Js\Login.js" />
     <Content Include="Static\Js\System.js" />
@@ -245,6 +247,12 @@
       <Project>{21fbe115-49c5-47c9-b789-f018500ff3e1}</Project>
       <Name>Manager.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\System\SystemInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\JobMonitor\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

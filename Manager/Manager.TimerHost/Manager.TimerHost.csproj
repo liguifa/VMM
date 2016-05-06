@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0C34B9C7-B6C2-4266-8E59-B869FCBD100A}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{9C2E5ADD-B04C-4442-8A29-BBE6B5A77D3B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Manager.BLL</RootNamespace>
-    <AssemblyName>Manager.BLL</AssemblyName>
+    <RootNamespace>Manager.TimerHost</RootNamespace>
+    <AssemblyName>Manager.TimerHost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,55 +33,52 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgentServer.cs" />
-    <Compile Include="BaseBLL.cs" />
-    <Compile Include="Job.cs" />
-    <Compile Include="JobReport.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service.Designer.cs">
+      <DependentUpon>Service.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="VMSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Agent\Manager.Contract\Agent.Contract.csproj">
-      <Project>{cfc194d6-31ed-4aa6-ae5f-65c5555e6657}</Project>
-      <Name>Agent.Contract</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service.resx">
+      <DependentUpon>Service.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Manager.TimerService\Manager.TimerService.csproj">
+      <Project>{5c69376c-2d11-4878-9d30-402a98d653dc}</Project>
+      <Name>Manager.TimerService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\Common.Function\Common.Function.csproj">
-      <Project>{1e0b34a5-233d-45f7-933d-51b71be3d62e}</Project>
-      <Name>Common.Function</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\Common.Logger\Common.Logger.csproj">
-      <Project>{c2c92005-3adc-49e2-85a2-8bd031190485}</Project>
-      <Name>Common.Logger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\Common.Message\Common.Message.csproj">
-      <Project>{15cbbf22-6cce-47d6-9765-283cd7b1dbe7}</Project>
-      <Name>Common.Message</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Thread\Common.Thread.csproj">
-      <Project>{533ff6c5-b27e-4a62-9ff1-c6471bddb60e}</Project>
-      <Name>Common.Thread</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Manager.AgentServices\Manager.AgentServices.csproj">
-      <Project>{6dfcf662-c1bd-45a8-89d8-d466b8624108}</Project>
-      <Name>Manager.AgentServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Manager.DAL\Manager.DAL.csproj">
-      <Project>{cc359afd-6f4f-4698-826b-7d8e721bc240}</Project>
-      <Name>Manager.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Manager.Model\Manager.Model.csproj">
-      <Project>{21fbe115-49c5-47c9-b789-f018500ff3e1}</Project>
-      <Name>Manager.Model</Name>
+    <ProjectReference Include="..\Manager.TimrContract\Manager.TimrContract.csproj">
+      <Project>{c4068c34-793c-4e13-9ab1-bebbbf2744cf}</Project>
+      <Name>Manager.TimrContract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

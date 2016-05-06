@@ -21,6 +21,10 @@ namespace Common.Message
             public string LastOperationTime { get; set; }
 
             public string System { get; set; }
+
+            public string Memory { get; set; }
+
+            public string Cpu { get; set; }
         }
     }
 }

@@ -1,0 +1,37 @@
+﻿<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="align-center">选择</th>
+            <th class="align-center">序号</th>
+            <th class="align-center">名称</th>
+            <th class="align-center">系统</th>
+            <th class="align-center">创建时间</th>
+            <th class="align-center">上次操作时间</th>
+            <th class="align-center">状态</th>
+            <th class="align-center">Cpu</th>
+            <th class="align-center">内存</th>
+            <th class="align-center">备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Common.Message.SystemInfoMessage.VMSystem vmSystem in (ViewBag.vmSystem as Common.Message.SystemInfoMessage).VMSystyems)
+        {
+            <tr id="@vmSystem.Name">
+                <td class="align-center">
+                    <label class="checkbox">
+                        <input type="checkbox" class="sys_id" value="" data-sysname="@vmSystem.Name"><span class="metro-checkbox"></span>
+                    </label>
+                </td>
+                <td class="align-center"></td>
+                <td class="align-center">@vmSystem.Name</td>
+                <td class="align-center">@vmSystem.System</td>
+                <td class="align-center">@vmSystem.CreateTime</td>
+                <td class="align-center">@vmSystem.LastOperationTime</td>
+                <td class="align-center">@vmSystem.Status</td>
+                <td class="align-center">@vmSystem.Cpu</td>
+                <td class="align-center">@vmSystem.Memory</td>
+                <td class="align-center"></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -2,7 +2,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layout.basic.cshtml";
 }
-
+<script src="~/Static/Js/System.js"></script>
 <div class="win-commandlayout">
     <a class="win-command nav-page-top" href="#">
         <span class="win-commandicon win-commandring  icon-arrow-left-12"></span>
@@ -11,11 +11,11 @@
 
     <hr class="win-command nav-page-top" />
     <div class="command-list">
-        <button class="win-command">
+        <button class="win-command Active-Command">
             <span class="win-commandicon win-commandring icon-play"></span>
             <span class="win-label">开机</span>
         </button>
-        <button class="win-command Active-Command">
+        <button class="win-command">
             <span class="win-commandicon win-commandring  icon-stop"></span>
             <span class="win-label">关机</span>
         </button>
@@ -52,53 +52,6 @@
     <hr class="win-command nav-page-buttom" />
 </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th class="align-center">选择</th>
-            <th class="align-center">序号</th>
-            <th class="align-center">名称</th>
-            <th class="align-center">系统</th>
-            <th class="align-center">创建时间</th>
-            <th class="align-center">上次操作时间</th>
-            <th class="align-center">状态</th>
-            <th class="align-center">备注</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Common.Message.SystemInfoMessage.VMSystem vmSystem in (ViewBag.vmSystem as Common.Message.SystemInfoMessage).VMSystyems)
-        {
-            <tr id="@vmSystem.Name">
-                <td class="align-center">
-                    <label class="checkbox">
-                        <input type="checkbox"><span class="metro-checkbox"></span>
-                    </label>
-                </td>
-                <td class="align-center"></td>
-                <td class="align-center">@vmSystem.Name</td>
-                <td class="align-center">@vmSystem.System</td>
-                <td class="align-center">@vmSystem.CreateTime</td>
-                <td class="align-center">@vmSystem.LastOperationTime</td>
-                <td class="align-center">@vmSystem.Status</td>
-                <td class="align-center"></td>
-            </tr>
-        }
-        @*@for (int i = 1; i <= 8; i++)
-            {
-                <tr>
-                    <td class="align-center">
-                        <label class="checkbox">
-                            <input type="checkbox"><span class="metro-checkbox"></span>
-                        </label>
-                    </td>
-                    <td class="align-center">@i</td>
-                    <td class="align-center">VM2015110709029988</td>
-                    <td class="align-center">Windows 10</td>
-                    <td class="align-center">2015-11-07 09:03</td>
-                    <td class="align-center">2015-11-07 09:03</td>
-                    <td class="align-center">开机</td>
-                    <td class="align-center"></td>
-                </tr>
-            }*@
-    </tbody>
-</table>
+<div class="table-bordered">
+    <img src="~/Static/Images/loading.gif" />
+</div>

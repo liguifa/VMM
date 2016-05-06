@@ -30,7 +30,7 @@ namespace Agent.VMware
             object syncRoot = new object();
             Parallel.ForEach(Config.GetInstance("vmware.config").Machines, machine =>
             {
-                VMware manager = new VMware(machine.Address,machine.Username, machine.Password);
+                VMware manager = new VMware(machine.Address, machine.Username, machine.Password);
                 List<SystemInfoResponseMessage.VMSystem> systems = manager.GetVMSystems();
                 lock (syncRoot)
                 {
@@ -45,8 +45,14 @@ namespace Agent.VMware
 
         public SystemActiveResponseMessage ActiveSystem(SystemActiveRequestMessage request)
         {
-            //TODO
-            return null;
+            List<SystemInfoResponseMessage.VMSystem> outSystems = new List<SystemInfoResponseMessage.VMSystem>();
+            object syncRoot = new object();
+            Parallel.ForEach(Config.GetInstance("vmware.config").Machines, machine =>
+            {
+                VMware manager = new VMware(machine.Address, machine.Username, machine.Password);
+                manager.ActiveSystem(request.Names);
+            });
+            return new SystemActiveResponseMessage();
         }
     }
 }

@@ -105,7 +105,9 @@ namespace Manager.BLL
                                     Name = system.Name,
                                     CreateTime = system.CreateTime,
                                     LastOperationTime = system.LastOperationTime,
-                                    Status = system.Status
+                                    Status = system.Status,
+                                    Cpu = system.Cpu,
+                                    Memory = system.Memory
                                 });
                             }
                         }
@@ -138,22 +140,23 @@ namespace Manager.BLL
             SysytemActiveMessage message = new SysytemActiveMessage();
             try
             {
-                Dictionary<Guid, List<string>> vmSystemGroup = this.GetVMSystemGroup(vmNames);
+                //Dictionary<Guid, List<string>> vmSystemGroup = this.GetVMSystemGroup(vmNames);
+                List<Manager.Model.AgentServer> agentServers = new AgentServer().GetAgentServer();
                 SmartThread smartThread = new SmartThread();
-                foreach (var item in vmSystemGroup)
+                foreach (var agentServer in agentServers)
                 {
                     smartThread.Invoke((args) =>
                     {
-                        Manager.Model.AgentServer agentServer = new AgentServer().GetAgentServer(item.Key);
+                        //Manager.Model.AgentServer agentServer = new AgentServer().GetAgentServer(item.Key);
                         try
                         {
 
                             SystemActiveRequestMessage request = new SystemActiveRequestMessage();
-                            request.Names = item.Value;
+                            request.Names = vmNames;
                             EndpointAddress endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}", agentServer.AgentServer_Address, agentServer.AgentServer_Port));
                             Manager.AgentServices.VMSystem vmSystem = new AgentServices.VMSystem(endpoint);
                             SystemActiveResponseMessage response = vmSystem.ActiveSystem(request);
-
+                            new Job().AddJob(0);
                         }
                         catch (TimeoutException e)
                         {
